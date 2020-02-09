@@ -14,7 +14,7 @@ class Task: Object {
     @objc dynamic var id = 0
     
     //カテゴリー
-    @objc dynamic var category = ""
+    @objc dynamic var category = ""   //追加した
     
     //タイトル
     @objc dynamic var title = ""

@@ -15,8 +15,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="VLC-0z-uTq">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J3b-Ev-qBB">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="154" width="414" height="708"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="zCA-d8-yeS" detailTextLabel="ypW-M8-iXg" style="IBUITableViewCellStyleSubtitle" id="JCI-c9-vn0">
@@ -48,22 +52,27 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="J3b-Ev-qBB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WWj-Yk-bhV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="J3b-Ev-qBB" secondAttribute="trailing" id="WYO-tt-qwS"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="J3b-Ev-qBB" secondAttribute="bottom" id="Y9d-Ie-8G9"/>
-                            <constraint firstItem="J3b-Ev-qBB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aV5-HE-xmP"/>
+                            <constraint firstItem="VLC-0z-uTq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1if-1e-ddV"/>
+                            <constraint firstItem="VLC-0z-uTq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aN1-rX-7GE"/>
+                            <constraint firstItem="J3b-Ev-qBB" firstAttribute="top" secondItem="VLC-0z-uTq" secondAttribute="bottom" constant="10" id="aUs-lo-ymn"/>
+                            <constraint firstItem="J3b-Ev-qBB" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="bs4-Ko-R7w"/>
+                            <constraint firstItem="VLC-0z-uTq" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wbb-JA-yzL"/>
+                            <constraint firstItem="J3b-Ev-qBB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="y44-AF-4BP"/>
+                            <constraint firstItem="J3b-Ev-qBB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="yh2-97-LXy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Uv0-jP-jpH">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4ax-K6-lEa">
                             <connections>
-                                <segue destination="p5B-AE-7XN" kind="show" identifier="Input View Controller" id="wOO-ar-cUE"/>
+                                <segue destination="p5B-AE-7XN" kind="show" identifier="input view controller" id="wOO-ar-cUE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="VLC-0z-uTq" id="GeR-KM-L5v"/>
                         <outlet property="tableView" destination="J3b-Ev-qBB" id="0Hj-xn-nG5"/>
+                        <segue destination="p5B-AE-7XN" kind="show" identifier="cellSegue" id="var-uq-Q5d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -160,7 +169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ImH-dc-mmk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2795.6521739130435" y="105.80357142857143"/>
+            <point key="canvasLocation" x="2791" y="102"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2vw-rl-y9Q">
@@ -181,4 +190,7 @@
             <point key="canvasLocation" x="1023.1884057971015" y="101.78571428571428"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="var-uq-Q5d"/>
+    </inferredMetricsTieBreakers>
 </document>

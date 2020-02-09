@@ -7,20 +7,25 @@
 //
 
 import UIKit
-import RealmSwift  //追加する
+import RealmSwift
 import UserNotifications //追加
 
 
 class InputViewController: UIViewController {
     
     
-    @IBOutlet weak var categoryTextField: UITextField! //追加
+    @IBOutlet weak var categoryTextField: UITextField! //カテゴリー追加
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     let realm = try! Realm()
     var task: Task!
+    
+    //https://qiita.com/Simmon/items/8760de60162068781278
+    var tableView: UITableView!
+    var searchBar = UISearchBar()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +38,7 @@ class InputViewController: UIViewController {
         titleTextField.text = task.title
         contentsTextView.text = task.contents
         datePicker.date = task.date
+        
         
     }
     
@@ -61,11 +67,6 @@ class InputViewController: UIViewController {
     func setNotification (task: Task) {
         let content = UNMutableNotificationContent()
         //タイトルと内容の設定（中身がない場合メッセージ無しで音だけ通知になるので「（＊＊なし）」を表示する）
-        if task.category == "" {  //追加
-            content.title = "(タイトルなし）"
-        } else {
-            content.title = task.title
-        }
         if task.title == "" {
             content.title = "(タイトルなし)"
         } else {
@@ -91,7 +92,6 @@ class InputViewController: UIViewController {
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error) in
             print(error ?? "ローカル通知登録　OK")  //error　がnilならローカル通知の登録に成功したと表示します。errorが存在すればerrorを表示します。
-            
         }
         
         //未通知のローカル通知一覧をログ出力
@@ -108,8 +108,6 @@ class InputViewController: UIViewController {
     
 }
 // Do any additional setup after loading the view.
-
-
 
 
 
