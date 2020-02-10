@@ -12,16 +12,16 @@ import UserNotifications //追加
 
 
 class InputViewController: UIViewController {
-    
-    
+        
     @IBOutlet weak var categoryTextField: UITextField! //カテゴリー追加
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
+
     let realm = try! Realm()
     var task: Task!
-    
+     
     //https://qiita.com/Simmon/items/8760de60162068781278
     var tableView: UITableView!
     var searchBar = UISearchBar()
@@ -32,14 +32,14 @@ class InputViewController: UIViewController {
         
         //背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
+        
         self.view.addGestureRecognizer(tapGesture)
         
         categoryTextField.text = task.category  //追加
         titleTextField.text = task.title
         contentsTextView.text = task.contents
         datePicker.date = task.date
-        
-        
+                
     }
     
     @objc func dismissKeyboard() {

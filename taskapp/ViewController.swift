@@ -28,6 +28,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        //searchBar関連
+        //searchBarの作成
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        
     }
     
     //データの数（=セルの数）を返すメソッド
@@ -44,7 +53,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //Cellに値を設定する
         //tableView(_:commit:forRowAt)は各セルの内容を返すメソッド
         let task = taskArray[indexPath.row]
-        cell.textLabel?.text = task.title
+        cell.textLabel?.text = task.category  //変更した
+        
+        
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
@@ -107,9 +118,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchBarSearchButtonClicked(_ searchBar :UISearchBar) {
         searchBar.endEditing(true)
         
+        
+        
         //NSPredicateを使って検索条件をしているする　追加した
-        let predicate = NSPredicate(format: "text = seaerchBar.text " )
+        let predicate = NSPredicate(format: "category == %@",searchBar.text! )   //検索条件を指定
         taskArray = realm.objects(Task.self).filter(predicate)
         
+        tableView.reloadData()
+        
+        print("サーチバー")   //調べるために入力
     }
 }
+

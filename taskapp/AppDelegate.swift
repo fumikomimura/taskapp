@@ -6,6 +6,7 @@
 //  Copyright © 2020 三村文子. All rights reserved.
 
 
+ //ビルドしたらエラー出ている途中
 
 import UIKit
 import UserNotifications
@@ -50,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    
+   
 
 }
