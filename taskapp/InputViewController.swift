@@ -10,22 +10,19 @@ import UIKit
 import RealmSwift
 import UserNotifications //追加
 
-
 class InputViewController: UIViewController {
-        
+    
     @IBOutlet weak var categoryTextField: UITextField! //カテゴリー追加
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
-
     let realm = try! Realm()
     var task: Task!
-     
+    
     //https://qiita.com/Simmon/items/8760de60162068781278
     var tableView: UITableView!
     var searchBar = UISearchBar()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +36,11 @@ class InputViewController: UIViewController {
         titleTextField.text = task.title
         contentsTextView.text = task.contents
         datePicker.date = task.date
-                
     }
     
     @objc func dismissKeyboard() {
         //キーボードを閉じる
         view.endEditing(true)
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,7 +55,6 @@ class InputViewController: UIViewController {
         setNotification(task: task)
         
         super.viewWillDisappear(animated)
-        
     }
     
     //タスクのローカル通知を登録する
@@ -100,16 +94,11 @@ class InputViewController: UIViewController {
                 print("/---------------")
                 print(request)
                 print("---------------/")
-                
             }
-            
         }
     }
-    
 }
 // Do any additional setup after loading the view.
-
-
 
 /*
  // MARK: - Navigation

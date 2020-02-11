@@ -36,7 +36,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //searchBarの作成
         searchBar.delegate = self
         searchBar.showsCancelButton = true
-        
+        searchBar.placeholder = "検索"
     }
     
     //データの数（=セルの数）を返すメソッド
@@ -54,8 +54,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //tableView(_:commit:forRowAt)は各セルの内容を返すメソッド
         let task = taskArray[indexPath.row]
         cell.textLabel?.text = task.category  //変更した
-        
-        
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
@@ -87,7 +85,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-    
     //segueで画面遷移する時に呼ばれる
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         let inputViewController:InputViewController = segue.destination as! InputViewController
@@ -103,8 +100,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let allTasks = realm.objects(Task.self)
             if allTasks.count != 0 {
                 task.id = allTasks.max(ofProperty: "id")! + 1
-                
             }
+            
             inputViewController.task = task
         }
     }
@@ -112,21 +109,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        
     }
+    
     //検索時の呼び出しメソッド
     func searchBarSearchButtonClicked(_ searchBar :UISearchBar) {
         searchBar.endEditing(true)
         
-        
-        
         //NSPredicateを使って検索条件をしているする　追加した
-        let predicate = NSPredicate(format: "category == %@",searchBar.text! )   //検索条件を指定
+        let predicate = NSPredicate(format: "category == %@",searchBar.text! )   //←検索条件を指定
         taskArray = realm.objects(Task.self).filter(predicate)
-        
         tableView.reloadData()
         
-        print("サーチバー")   //調べるために入力
+        print("サーチバー")   //調べるために入れた
+    }
+    
+    //検索をキャンセルした時の処理
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        let searchBar = false  //キャンセルボタン表示
+        tableView.isHidden = false
+        
+        
+        
+        //   tableView.reloadData()
+        //   print("キャンセルボタン")
+    }
+    
+    //検索結果を削除するとまた元のタスク一覧を表示させる
+    //https://qiita.com/Riscait/items/f38b2272d691778193f4
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            //↑サーチバーが入力されている文字が空かどうか判断できる
+            
+            //元のタスク一覧を表示する
+            taskArray = try! Realm().objects(Task.self)
+            //taskArrayに入れた結果を画面に反映させる
+            tableView.reloadData()
+        }
     }
 }
-
